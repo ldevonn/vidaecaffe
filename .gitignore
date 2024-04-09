@@ -1,1 +1,9 @@
 .idea/
+.env
+__pycache__/
+*.py[cod]
+.venv
+.DS_Store
+.vscode/
+/.flaskenv
+dev.db
