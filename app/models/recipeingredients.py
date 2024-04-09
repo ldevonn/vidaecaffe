@@ -7,8 +7,8 @@ class RecipeIngredient(db.Model):
     __tablename__ = 'recipe_ingredients'
 
     id = db.Column(db.Integer, primary_key=True)
-    recipeId = db.Column(db.Integer, ForeignKey('recipes.id'))
-    ingredient_id = db.Column(db.Integer, ForeignKey('ingredients.id'))
+    recipeId = db.Column(db.Integer, ForeignKey(add_prefix_for_prod('recipes.id')))
+    ingredient_id = db.Column(db.Integer, ForeignKey(add_prefix_for_prod('ingredients.id')))
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 

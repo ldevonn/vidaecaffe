@@ -9,7 +9,7 @@ class OrderItem(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     order_id = db.Column(db.Integer, ForeignKey(Order.id))
-    productId = db.Column(db.Integer, ForeignKey('menus.id'))
+    productId = db.Column(db.Integer, ForeignKey(add_prefix_for_prod('menus.id')))
     quantity = db.Column(db.Integer)
     subtotal = db.Column(db.Float)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)

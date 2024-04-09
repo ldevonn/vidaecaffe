@@ -6,7 +6,7 @@ class Inventory(db.Model):
     __tablename__ = "inventories"
 
     id = db.Column(db.Integer, primary_key=True)
-    ingredientId = db.Column(db.Integer, ForeignKey("ingredients.id"), nullable=False)
+    ingredientId = db.Column(db.Integer, ForeignKey(add_prefix_for_prod("ingredients.id")), nullable=False)
     quantity = db.Column(db.Integer, nullable=False)
     unit = db.Column(db.String, nullable=False)
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
