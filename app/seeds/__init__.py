@@ -14,6 +14,7 @@ seed_commands = AppGroup('seed')
 def seed():
     if environment == 'production':
         undo_users()
+        undo_menus()
     seed_users()
     seed_menus()
 
