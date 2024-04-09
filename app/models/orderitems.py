@@ -18,7 +18,7 @@ class OrderItem(db.Model):
     def to_dict(self):
         return {
             'id': self.id,
-            'orderId': self.orderId,
+            'order_id': self.orderId,
             'productId': self.productId,
             'quantity': self.quantity,
             'subtotal': self.subtotal,
