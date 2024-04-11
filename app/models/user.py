@@ -7,11 +7,13 @@ from flask_login import UserMixin
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
 
-    orders = relationship('Order', back_populates='user', cascade='all, delete')
+    if environment == 'production':
+        __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(40), nullable=False, unique=True)
-    email = db.Column(db.String(255), nullable=False, unique=True)
+    username = db.Column(db.String(15), nullable=False, unique=True)
+    email = db.Column(db.String(20), nullable=False, unique=True)
+    role = db.Column(db.String(20), nullable=False)
     hashed_password = db.Column(db.String(255), nullable=False)
 
     @property
@@ -29,5 +31,6 @@ class User(db.Model, UserMixin):
         return {
             'id': self.id,
             'username': self.username,
-            'email': self.email
+            'email': self.email,
+            'orders': self.orders,
         }

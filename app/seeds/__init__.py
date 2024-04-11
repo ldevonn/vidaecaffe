@@ -1,8 +1,8 @@
 from flask.cli import AppGroup
 from .users import seed_users, undo_users
-from .menus import seed_menus, undo_menus
+from .orders import seed_orders, undo_orders
+from .products import seed_products, undo_products
 from .ingredients import seed_ingredients, undo_ingredients
-from .recipes import seed_recipes, undo_recipes
 
 from app.models.db import db, environment, SCHEMA
 
@@ -16,12 +16,12 @@ seed_commands = AppGroup('seed')
 def seed():
     if environment == 'production':
         undo_users()
-        undo_menus()
-        undo_recipes()
+        undo_orders()
+        undo_products()
         undo_ingredients()
     seed_users()
-    seed_menus()
-    seed_recipes()
+    seed_orders()
+    seed_products()
     seed_ingredients()
 
 
@@ -29,6 +29,6 @@ def seed():
 @seed_commands.command('undo')
 def undo():
     undo_users()
-    undo_menus()
-    undo_recipes()
+    undo_orders()
+    undo_products()
     undo_ingredients()
