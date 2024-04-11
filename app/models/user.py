@@ -7,7 +7,7 @@ from flask_login import UserMixin
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
 
-    orders = relationship('Order', backref='user', cascade='all, delete')
+    orders = relationship('Order', back_populates='user', cascade='all, delete')
 
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(40), nullable=False, unique=True)

@@ -7,6 +7,9 @@ from datetime import datetime
 class Recipe(db.Model):
     __tablename__ = 'recipes'
 
+    if environment == 'production':
+        __table_args__ = {'schema': SCHEMA}
+
     ingredients = db.relationship("Ingredient", secondary='recipe_ingredients', back_populates="recipes")
 
     id = db.Column(db.Integer, primary_key=True)
@@ -18,5 +21,5 @@ class Recipe(db.Model):
             'id': self.id,
             'name': self.name,
             'size': self.size,
-            'recipeIngredients': self.recipeIngredients
+            'recipeIngredients': [ingredient.id for ingredient in self.ingredients]
         }

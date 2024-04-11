@@ -17,9 +17,6 @@ class Menu(db.Model):
     category = db.Column(db.String(30), nullable=False)
     productImg = db.Column(db.String(30), nullable=False)
     recipeId = db.Column(db.Integer, ForeignKey(add_prefix_for_prod('recipes.id')), nullable=False)
-    created_at = db.Column(db.DateTime, default=datetime.utcnow)
-    updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
-
     def to_dict(self):
         return {
             'id': self.id,

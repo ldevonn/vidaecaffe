@@ -5,6 +5,9 @@ from datetime import datetime
 class Inventory(db.Model):
     __tablename__ = "inventories"
 
+    if environment == 'production':
+        __table_args__ = {'schema': SCHEMA}
+
     id = db.Column(db.Integer, primary_key=True)
     ingredientId = db.Column(db.Integer, ForeignKey(add_prefix_for_prod("ingredients.id")), nullable=False)
     quantity = db.Column(db.Integer, nullable=False)

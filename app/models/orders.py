@@ -4,25 +4,27 @@ from sqlalchemy.orm import relationship
 from datetime import datetime
 
 class Order(db.Model):
-    _tablename__ = 'orders'
+    __tablename__ = 'orders'
 
-    order_items = relationship('OrderItem', backref='order', cascade='all, delete')
+    if environment == 'production':
+        __table_args__ = {'schema': SCHEMA}
+
+    user = relationship('User', back_populates='orders')
+    order_items = relationship('OrderItem', back_populates='order', cascade='all, delete')
 
     id = db.Column(db.Integer, primary_key=True)
     user_id = Column(db.Integer, ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
-    orderDate = Column(db.DateTime, default=datetime.utcnow)
+    order_date = Column(db.DateTime, default=datetime.utcnow)
     subtotal = db.Column(db.Float, nullable=False)
     total = db.Column(db.Float, nullable=False)
-    orderStatus = db.Column(db.String, nullable=False)
-    created_at = db.Column(db.DateTime, default=datetime.utcnow)
-    updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    order_status = db.Column(db.String, nullable=False)
 
     def to_dict(self):
         return {
             'id': self.id,
-            'user_id': self.userId,
-            'orderDate': self.orderDate,
+            'userId': self.userId,
+            'orderDate': self.order_date,
             'subtotal': self.subtotal,
             'total': self.total,
-            'orderStatus': self.orderStatus,
+            'orderStatus': self.order_status,
         }
