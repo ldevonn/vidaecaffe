@@ -1,0 +1,52 @@
+#vida-logo-nav {
+    height: 8vmin;
+    margin-right: 40px
+}
+
+#vida-logo-nav:hover {
+    cursor: pointer;
+}
+
+#top-bar-nav{
+    display: flex;
+    align-items: center;
+}
+
+#top-bar-nav a {
+    margin-right: 40px;
+    color: white;
+    text-decoration: none;
+}
+
+#top-bar-nav a:hover {
+    color: #b5b5b5;
+    transition: 0.2s;
+}
+
+#login-join{
+    display: flex;
+    align-items: center;
+}
+
+#login-button {
+    margin-right: 5px;
+}
+
+#login-join button {
+    color: black;
+    width: 10vmin;
+    height: 3vmin;
+    background-color: var(--color-button);
+    border: none;
+    border-radius: 10px;
+}
+
+#login-join button:hover {
+    background-color: var(--color-button-hover);
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+hr {
+    border-color: gray;
+}

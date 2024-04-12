@@ -1,0 +1,47 @@
+:root {
+    --color-background: #2B2B2B;
+    --color-button: #60C460;
+    --color-button-hover: #4fac4f;
+    --color-landing-title: white;
+    --common-font: Inter, serif;
+    --box-shadow: inset rgba(0, 0, 0, 0.25) 3px -4px 4px;
+}
+
+* {
+    background-color: var(--color-background);
+    font-family: var(--common-font);
+    margin: 5px 0 5px 0;
+}
+
+.landing-center-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20vmin;
+}
+
+#vida-logo {
+    height: 20vmin;
+}
+
+#menu-button {
+    background-color: var(--color-button);
+    font-size: 2vmin;
+    font-weight: bolder;
+    height: 6vmin;
+    width: 20vmin;
+    border: none;
+    border-radius: 15px;
+    box-shadow: var(--box-shadow);
+}
+
+#menu-button:hover {
+    cursor: pointer;
+    transition: 0.2s;
+    background-color: var(--color-button-hover);
+}
+
+#landing-title {
+    color: var(--color-landing-title);
+}
