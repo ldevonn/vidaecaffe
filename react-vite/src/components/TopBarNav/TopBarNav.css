@@ -1,6 +1,8 @@
 #vida-logo-nav {
     height: 8vmin;
-    margin-right: 40px
+    margin-right: 40px;
+    z-index: 1;
+    background: transparent;
 }
 
 #vida-logo-nav:hover {
@@ -10,12 +12,15 @@
 #top-bar-nav{
     display: flex;
     align-items: center;
+    z-index: 1;
 }
 
 #top-bar-nav a {
     margin-right: 40px;
     color: white;
     text-decoration: none;
+    z-index: 1;
+    background: transparent;
 }
 
 #top-bar-nav a:hover {
@@ -39,6 +44,8 @@
     background-color: var(--color-button);
     border: none;
     border-radius: 10px;
+    box-shadow: var(--box-shadow);
+    z-index: 1;
 }
 
 #login-join button:hover {
@@ -49,4 +56,5 @@
 
 hr {
     border-color: gray;
+    /*z-index: 1;*/
 }

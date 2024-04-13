@@ -4,7 +4,7 @@
     --color-button-hover: #4fac4f;
     --color-landing-title: white;
     --common-font: Inter, serif;
-    --box-shadow: inset rgba(0, 0, 0, 0.25) 3px -4px 4px;
+    --box-shadow: inset rgba(0, 0, 0, 0.25) 3px -3px 4px;
 }
 
 * {
@@ -23,6 +23,8 @@
 
 #vida-logo {
     height: 20vmin;
+    z-index: 1;
+    background: transparent;
 }
 
 #menu-button {
@@ -34,6 +36,7 @@
     border: none;
     border-radius: 15px;
     box-shadow: var(--box-shadow);
+    z-index: 1;
 }
 
 #menu-button:hover {
@@ -44,4 +47,6 @@
 
 #landing-title {
     color: var(--color-landing-title);
+    z-index: 1;
+    background: transparent;
 }
