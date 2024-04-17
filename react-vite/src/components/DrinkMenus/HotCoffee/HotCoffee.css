@@ -1,0 +1,36 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+#display-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 1%;
+    margin: 5% 5%;
+}
+
+#display-card > *{
+    background: none;
+    display: flex;
+    justify-content: left;
+}
+
+#display-card{
+    padding: 2rem;
+    color: #ffffff;
+}
+
+#product-img {
+    width: 18rem;
+}
+
+#product-img:hover {
+    cursor: pointer;
+}
+
+#display-card:hover {
+    cursor: pointer;
+}
+

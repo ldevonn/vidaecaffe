@@ -1,7 +1,9 @@
 #vida-logo-nav {
-    height: 8vmin;
-    margin-right: 40px;
-    z-index: 1;
+    width: 77px;
+    height: 77px;
+    margin-left: 2rem;
+    margin-right: 7.69rem;
+    /*flex-shrink: 0;*/
     background: transparent;
 }
 
@@ -11,8 +13,9 @@
 
 #top-bar-nav{
     display: flex;
+    height: 6rem;
+    width: 120rem;
     align-items: center;
-    z-index: 1;
 }
 
 #top-bar-nav a {
@@ -28,16 +31,25 @@
     transition: 0.2s;
 }
 
-#login-join{
+#section-2 {
+    margin-left: 20.5rem;
     display: flex;
-    align-items: center;
+    color: white;
+    gap: 1rem;
+    width: 35rem
 }
 
-#login-button {
-    margin-right: 5px;
+
+
+
+
+#section-3{
+    display: flex;
+    margin-left: 7.5rem;
+    gap: 15px;
 }
 
-#login-join button {
+#section-3 button {
     color: black;
     width: 10vmin;
     height: 3vmin;
@@ -48,7 +60,7 @@
     z-index: 1;
 }
 
-#login-join button:hover {
+#section-3 button:hover {
     background-color: var(--color-button-hover);
     cursor: pointer;
     transition: 0.2s;
@@ -56,5 +68,4 @@
 
 hr {
     border-color: gray;
-    /*z-index: 1;*/
 }

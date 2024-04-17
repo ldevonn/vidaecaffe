@@ -1,9 +1,10 @@
 import { thunkLogin } from "../../redux/session";
 import { useDispatch, useSelector } from "react-redux";
-import { Navigate, useNavigate } from "react-router-dom";
+import {Navigate, NavLink, useNavigate} from "react-router-dom";
 import {useFormik} from "formik"
 import * as Yup from 'yup'
 import "./LoginForm.css";
+import {useRef, useState} from "react";
 
 const validationSchema = Yup.object({
   email: Yup.string()
@@ -18,7 +19,14 @@ function LoginFormPage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
-  const {handleSubmit, handleChange, values, errors, touched} = useFormik({
+
+
+  const {handleSubmit,
+      handleChange,
+      values,
+      errors,
+      touched,
+      isValid,} = useFormik({
     initialValues: {
       email: "",
       password: ""
@@ -36,30 +44,32 @@ function LoginFormPage() {
 
   return (
     <>
-      <h1>Log In</h1>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Email
-          <input
-            type="text"
-            name="email"
-            value={values.email}
-            onChange={handleChange}
-          />
-          {touched.email && errors.email && <p>{errors.email}</p>}
-        </label>
-        <label>
-          Password
-          <input
-            type="password"
-            name="password"
-            value={values.password}
-            onChange={handleChange}
-          />
-          {touched.password && errors.password && <p>{errors.password}</p>}
-        </label>
-        <button type="submit">Log In</button>
-      </form>
+      <h1 id='login-page-title'>Log In</h1>
+      <div id='login-form-container'>
+        <form onSubmit={handleSubmit} id="login-form">
+              <input
+                type="text"
+                name="email"
+                id='email-field'
+                placeholder="Email"
+                value={values.email}
+                onChange={handleChange}
+              />
+              {errors.email && touched.email && <p id='errors'>{errors.email}</p>}
+              <input
+                type="password"
+                name="password"
+                id='password-field'
+                placeholder="Password"
+                value={values.password}
+                onChange={handleChange}
+              />
+              {touched.password && errors.password && <p id='errors'> {errors.password}</p>}
+          <button id='login-form-button' type="submit">Sign In</button>
+          <NavLink id='navlink' to='/signup'> {"Don't have an account?"} <br /> {"Sign up and earn points on your next order!"}
+</NavLink>
+        </form>
+      </div>
     </>
   );
 }
