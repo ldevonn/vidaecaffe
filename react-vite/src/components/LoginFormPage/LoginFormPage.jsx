@@ -4,7 +4,6 @@ import {Navigate, NavLink, useNavigate} from "react-router-dom";
 import {useFormik} from "formik"
 import * as Yup from 'yup'
 import "./LoginForm.css";
-import {useRef, useState} from "react";
 
 const validationSchema = Yup.object({
   email: Yup.string()
@@ -50,24 +49,24 @@ function LoginFormPage() {
               <input
                 type="text"
                 name="email"
-                id='email-field'
+                id='email-login-field'
                 placeholder="Email"
                 value={values.email}
                 onChange={handleChange}
               />
-              {errors.email && touched.email && <p id='errors'>{errors.email}</p>}
+            <p id='errors'> {errors.email} </p>
               <input
                 type="password"
                 name="password"
-                id='password-field'
+                id='password-login-field'
                 placeholder="Password"
                 value={values.password}
                 onChange={handleChange}
               />
-              {touched.password && errors.password && <p id='errors'> {errors.password}</p>}
+              <p id='errors'> {errors.password}</p>
           <button id='login-form-button' type="submit">Sign In</button>
           <NavLink id='navlink' to='/signup'> {"Don't have an account?"} <br /> {"Sign up and earn points on your next order!"}
-</NavLink>
+          </NavLink>
         </form>
       </div>
     </>

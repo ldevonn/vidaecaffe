@@ -16,12 +16,12 @@
     border-radius: 1rem;
 }
 
-#email-field, #password-field {
+#email-login-field, #password-login-field {
     height: 3rem;
     border-radius: 5px;
     border: none;
     background: #3B3B3B;
-    margin-bottom: 20px;
+    margin-bottom: 5px;
 }
 
 #navlink {
@@ -30,9 +30,10 @@
 }
 
 #errors {
-    background-color: transparent;
     color: red;
-    height: 20px;
+    height: 1rem;
+    padding: 0.25rem;
+    background: transparent;
     margin-bottom: 15px;
 }
 
