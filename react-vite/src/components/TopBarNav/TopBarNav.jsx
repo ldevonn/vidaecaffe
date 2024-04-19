@@ -1,9 +1,20 @@
 import './TopBarNav.css'
 import vidaLogo from '../../assets/vidaLogo.png';
 import {NavLink, useNavigate} from "react-router-dom";
+import {useSelector, useDispatch} from "react-redux";
+import {thunkLogout} from "../../redux/session.js";
 
 const TopBarNav = () => {
     const navigate = useNavigate();
+    const currentUser = useSelector(state => state.session.user);
+    const dispatch = useDispatch()
+
+    const handleLogout = () => {
+        dispatch(thunkLogout())
+    }
+
+
+
     return (
         <>
             <div id="top-bar-nav">
@@ -40,8 +51,15 @@ const TopBarNav = () => {
                     <p>Cart</p>
                 </div>
                 <div id='section-3'>
-                    <button id='login-button' onClick={() => navigate('/login')}>Login</button>
-                    <button id='join-button' onClick={() => navigate('/signup')}>Join Now</button>
+                    {currentUser ? (
+                        <button id='logout-button'
+                                onClick={handleLogout}>Log Out</button>
+                    ) : (
+                        <>
+                            <button id='login-button' onClick={() => navigate('/login')}>Login</button>
+                            <button id='join-button' onClick={() => navigate('/signup')}>Join Now</button>
+                        </>
+                    )}
                 </div>
             </div>
             <hr id='test'/>
