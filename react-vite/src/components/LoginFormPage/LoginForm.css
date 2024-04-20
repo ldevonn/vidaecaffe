@@ -54,6 +54,6 @@
     cursor: pointer;
 }
 
-input::placeholder {
-    padding-left: 30px
-}
+/*input::placeholder {*/
+/*    padding-left: 30px*/
+/*}*/

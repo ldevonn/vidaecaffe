@@ -6,6 +6,7 @@ import SignupFormPage from '../components/SignupFormPage';
 import MenuPage from '../components/MenuPage';
 import {ColdCoffee, ColdTea, HotTea, HotCoffee} from "../components/DrinkMenus";
 import DrinkDetails from "../components/DrinkDetails/index.js";
+import ProductFormPage from "../components/ProductFormPage/ProductFormPage.jsx";
 
 export const router = createBrowserRouter([
   {
@@ -46,6 +47,10 @@ export const router = createBrowserRouter([
       {
         path: `/drinks/:drinkId`,
         element: <DrinkDetails/>
+      },
+      {
+        path: '/menu/new',
+        element: <ProductFormPage/>
       }
     ],
   },

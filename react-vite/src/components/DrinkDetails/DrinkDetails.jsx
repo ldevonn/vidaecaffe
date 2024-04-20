@@ -1,7 +1,7 @@
-import { useParams } from 'react-router-dom';
+import {redirect, useNavigate, useParams} from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { getAllProducts } from '../../redux/menu.js';
+import {deleteProductById, getAllProducts} from '../../redux/menu.js';
 import Loader from '../Loader';
 import Cart from '../Cart/Cart';
 
@@ -13,11 +13,16 @@ function DrinkDetails() {
     const products = useSelector(state => state.menu.products);
     const currentUser = useSelector(state => state.session.user);
     const {addItem, getItems } = Cart()
+    const navigate = useNavigate()
 
     useEffect(() => {
         dispatch(getAllProducts());
     }, [dispatch]);
 
+    const handleDelete = () => {
+        // dispatch(deleteProductById(drinkId));
+        navigate('/menu')
+    }
     if (!products) {
         return <Loader/>
     }
@@ -34,7 +39,7 @@ function DrinkDetails() {
             {currentUser && currentUser.role === 'admin' ? (
                 <>
                     <button className='cart-edit-button' onClick={() => addItem(product)}>Edit Item</button>
-                    <button className='cart-delete-button' onClick={() => addItem(product)}>Delete Item</button>
+                    <button className='cart-delete-button' onClick={() => handleDelete()}>Delete Item</button>
                 </>
 
             ) :
