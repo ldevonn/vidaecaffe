@@ -20,7 +20,7 @@ function DrinkDetails() {
     }, [dispatch]);
 
     const handleDelete = () => {
-        // dispatch(deleteProductById(drinkId));
+        dispatch(deleteProductById(drinkId));
         navigate('/menu')
     }
     if (!products) {

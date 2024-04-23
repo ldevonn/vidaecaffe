@@ -38,21 +38,21 @@ export const deleteProductById = (id) => async dispatch => {
 }
 
 export const createNewProduct = (product) => async dispatch => {
-    const response = await fetch('/api/products', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(product)
-    });
+    const response = await fetch('/api/products/new', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(product)
+    })
     if (response.ok) {
-      const data = await response.json();
-      if (data.errors) {
-        return;
+        const data = await response.json();
+        dispatch(createProduct(data));
+        return data
+    } else if (response.status < 500) {
+        const errors = await response.json();
+        return errors
       }
-
-      dispatch(createProduct(data));
-    }
 }
 
 
@@ -63,9 +63,11 @@ function menuReducer(state = initialState, action) {
     case GET_PRODUCTS:
       return { ...state, products: action.payload };
     case DELETE_PRODUCT:
-      return { ...state, products: action.payload };
+      return { ...state, products: action.payload.filter(
+          product => product.id !== action.payload.id
+          ) };
     case CREATE_PRODUCT:
-      return { ...state, products: action.payload };
+      return { ...state, products: [...state.products, action.payload] };
     default:
       return state;
   }

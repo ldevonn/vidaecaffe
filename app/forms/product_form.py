@@ -8,12 +8,12 @@ def name_exists(form, field):
     name = field.data
     found = Product.query.filter(Product.name == name).first()
     if found:
-        raise ValidationError('Email address is already in use.')
+        raise ValidationError('A product already exists with that name.')
 
 
 class ProductForm(FlaskForm):
     name = StringField(
-        'username', validators=[DataRequired(), name_exists])
+        'name', validators=[DataRequired(), name_exists])
     description = StringField('description', validators=[DataRequired()])
     price = FloatField('price', validators=[DataRequired(), NumberRange(min=0.0)])
     category = StringField('category', validators=[DataRequired()])

@@ -13,7 +13,9 @@ const TopBarNav = () => {
         dispatch(thunkLogout())
     }
 
+    const check = () => {
 
+    }
 
     return (
         <>
@@ -52,8 +54,11 @@ const TopBarNav = () => {
                 </div>
                 <div id='section-3'>
                     {currentUser ? (
-                        <button id='logout-button'
-                                onClick={handleLogout}>Log Out</button>
+                        <>
+                            <button onClick={handleLogout}>Log Out</button>
+                            {currentUser.role === 'admin' &&
+                                <button onClick={() => navigate('/menu/new')}>Add Product</button>}
+                        </>
                     ) : (
                         <>
                             <button id='login-button' onClick={() => navigate('/login')}>Login</button>

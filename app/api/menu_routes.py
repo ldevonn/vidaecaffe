@@ -1,8 +1,7 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
-from app import db
-from app.forms.product_form import ProductForm
-from app.models import Product
+from app.forms import ProductForm
+from app.models import Product, db
 
 product_routes = Blueprint('products', __name__)
 
@@ -80,17 +79,18 @@ def edit_product_by_id(product_id):
         return jsonify(product.to_dict())
 
 
-@product_routes.route('/', methods=['POST'])
-@login_required
+@product_routes.route('/new', methods=['GET', 'POST'])
 def create_product():
     """
     Creates a new product
     """
+    form = ProductForm()
 
     if current_user.role != 'admin':
         return jsonify({'error': 'Unauthorized'}), 401
 
-    form = ProductForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+
     if form.validate_on_submit():
         product = Product(
             name=form.data['name'],
@@ -101,5 +101,5 @@ def create_product():
         )
         db.session.add(product)
         db.session.commit()
-        return jsonify(product.to_dict()), 201
-    return form.errors, 401
+        return product.to_dict()
+    return jsonify(form.errors), 400
