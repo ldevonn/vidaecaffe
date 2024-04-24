@@ -38,7 +38,7 @@ function DrinkDetails() {
             </div>
             {currentUser && currentUser.role === 'admin' ? (
                 <>
-                    <button className='cart-edit-button' onClick={() => addItem(product)}>Edit Item</button>
+                    <button className='cart-edit-button' onClick={() => navigate(`/drinks/${product.id}/edit`)}>Edit Item</button>
                     <button className='cart-delete-button' onClick={() => handleDelete()}>Delete Item</button>
                 </>
 
