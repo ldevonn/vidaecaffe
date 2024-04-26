@@ -8,6 +8,7 @@ import {ColdCoffee, ColdTea, HotTea, HotCoffee} from "../components/DrinkMenus";
 import DrinkDetails from "../components/DrinkDetails/index.js";
 import ProductFormPage from "../components/ProductFormPage/ProductFormPage.jsx";
 import EditDrink from "../components/EditDrink/EditDrink.jsx";
+import Cart from "../components/Cart/Cart.jsx";
 
 export const router = createBrowserRouter([
   {
@@ -56,6 +57,10 @@ export const router = createBrowserRouter([
       {
         path: '/menu/new',
         element: <ProductFormPage/>
+      },
+      {
+        path: '/cart',
+        element: <Cart/>
       }
     ],
   },

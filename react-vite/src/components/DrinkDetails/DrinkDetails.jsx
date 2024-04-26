@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import {deleteProductById, getAllProducts} from '../../redux/menu.js';
 import Loader from '../Loader';
-import Cart from '../Cart/Cart';
+import {addItemToCart} from "../../redux/cart.js";
 
 import './DrinkDetails.css'
 
@@ -12,7 +12,6 @@ function DrinkDetails() {
     const { drinkId } = useParams();
     const products = useSelector(state => state.menu.products);
     const currentUser = useSelector(state => state.session.user);
-    const {addItem, getItems } = Cart()
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -25,6 +24,13 @@ function DrinkDetails() {
     }
     if (!products) {
         return <Loader/>
+    }
+    const addItem = () => {
+        const reqData = {
+            product_id: product.id,
+            quantity: 1
+        }
+        const res = dispatch(addItemToCart(reqData));
     }
     const product = products.filter(product => product.id == drinkId)[0];
 
@@ -45,7 +51,7 @@ function DrinkDetails() {
             ) :
                 ''
             }
-                <button className='cart-add-button' onClick={() => addItem(product)}>Add to Cart</button>
+                <button className='cart-add-button' onClick={() => addItem()}>Add to Cart</button>
         </>
     );
 }

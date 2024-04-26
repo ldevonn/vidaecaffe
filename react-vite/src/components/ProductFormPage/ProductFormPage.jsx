@@ -2,6 +2,7 @@ import styled from '@emotion/styled'
 import {createNewProduct} from "../../redux/menu.js";
 import {useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
+import {useEffect} from "react";
 
 export const StyledForm = styled.form`
     display: flex;
@@ -50,6 +51,7 @@ export const StyledSelect = styled.select`
 const ProductFormPage = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
+    const currentUser = useSelector(state => state.session.user)
     
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -70,6 +72,13 @@ const ProductFormPage = () => {
         );
         navigate(`/drinks/${newProduct.id}`)
     }
+
+    useEffect(() => {
+        if (!currentUser || currentUser.role !== 'admin') {
+            navigate('/')
+        }
+    }, [currentUser]);
+
 
     return (
         <>

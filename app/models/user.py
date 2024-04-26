@@ -10,6 +10,8 @@ class User(db.Model, UserMixin):
     if environment == 'production':
         __table_args__ = {'schema': SCHEMA}
 
+    cart = relationship('Cart', back_populates='user', uselist=False)
+
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(15), nullable=False, unique=True)
     email = db.Column(db.String(20), nullable=False, unique=True)

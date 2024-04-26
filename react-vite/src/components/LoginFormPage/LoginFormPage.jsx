@@ -6,18 +6,18 @@ import * as Yup from 'yup'
 import "./LoginForm.css";
 
 const validationSchema = Yup.object({
-  email: Yup.string()
-      .email("Invalid email format")
-      .required("Email must be provided"),
-  password: Yup.string()
-      .min(8, "Password must be at least 8 characters long")
-      .required("Password must be provided")
+    email: Yup.string()
+        .email("Invalid email format")
+        .required("Email must be provided"),
+    password: Yup.string()
+        .min(8, "Password must be at least 8 characters long")
+        .required("Password must be provided"),
 })
 
 function LoginFormPage() {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const sessionUser = useSelector((state) => state.session.user);
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const sessionUser = useSelector((state) => state.session.user);
 
 
   const {handleSubmit,

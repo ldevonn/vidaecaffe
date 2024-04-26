@@ -5,4 +5,5 @@ from .orderproduct import OrderProduct
 from .products import Product
 from .ingredients import Ingredient
 from .productingredient import ProductIngredient
+from .cart import Cart, CartItem
 from .db import environment, SCHEMA
