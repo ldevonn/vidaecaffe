@@ -1,4 +1,4 @@
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import {useEffect} from "react";
 import {getAllProducts} from "../../redux/menu.js";
 import {NavLink, useNavigate} from "react-router-dom";
@@ -65,7 +65,6 @@ const StyledMenuCard = styled.div`
 
 function MenuPage() {
   const dispatch = useDispatch();
-  const products = useSelector(state => state.menu.products);
   const navigate = useNavigate();
 
   useEffect(() => {

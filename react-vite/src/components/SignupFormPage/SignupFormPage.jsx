@@ -9,7 +9,6 @@ function SignupFormPage() {
   const navigate = useNavigate();
   const sessionUser = useSelector((state) => state.session.user);
   const [email, setEmail] = useState("");
-  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState({});
@@ -29,7 +28,6 @@ function SignupFormPage() {
     const serverResponse = await dispatch(
       thunkSignup({
         email,
-        username,
         password,
       })
     );

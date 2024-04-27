@@ -1,4 +1,4 @@
-import {redirect, useNavigate, useParams} from 'react-router-dom';
+import { useNavigate, useParams} from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import {deleteProductById, getAllProducts} from '../../redux/menu.js';
@@ -30,7 +30,7 @@ function DrinkDetails() {
             product_id: product.id,
             quantity: 1
         }
-        const res = dispatch(addItemToCart(reqData));
+        dispatch(addItemToCart(reqData));
     }
     const product = products.filter(product => product.id == drinkId)[0];
 

@@ -77,7 +77,7 @@ const ProductFormPage = () => {
         if (!currentUser || currentUser.role !== 'admin') {
             navigate('/')
         }
-    }, [currentUser]);
+    }, [currentUser, navigate]);
 
 
     return (

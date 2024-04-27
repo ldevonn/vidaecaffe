@@ -61,5 +61,10 @@ def remove_from_cart():
 
     db.session.delete(item)
     db.session.commit()
+    updatedItems = CartItem.query.filter_by(cart_id=cart.id).first()
+    if updatedItems is None:
+        db.session.delete(cart)
+        db.session.commit()
+        return jsonify(success=True, message='Item and cart removed'), 200
 
     return jsonify(success=True, message='Item removed from cart'), 200

@@ -24,8 +24,7 @@ function LoginFormPage() {
       handleChange,
       values,
       errors,
-      touched,
-      isValid,} = useFormik({
+  } = useFormik({
     initialValues: {
       email: "",
       password: ""

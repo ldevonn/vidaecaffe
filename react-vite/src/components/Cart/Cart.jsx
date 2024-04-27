@@ -2,7 +2,6 @@ import {addItemToCart, getUserCart, deleteItemFromCart} from "../../redux/cart.j
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
 import {NavLink, useNavigate} from "react-router-dom";
-import vidaLogo from "../../assets/vidaLogo.png";
 
 import './Cart.css'
 
@@ -18,7 +17,7 @@ function Cart() {
         } else {
             navigate('/')
         }
-        }, [dispatch]);
+        }, [dispatch, currentUser, navigate]);
 
     if (cart.length === 0) {
         return <>
@@ -30,7 +29,7 @@ function Cart() {
     }
 
     const handleDelete = (item) => {
-        dispatch(deleteItemFromCart(item.id));
+        dispatch(deleteItemFromCart(item.id))
     }
 
     const handleAdd = (item) => {

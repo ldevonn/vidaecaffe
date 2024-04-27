@@ -41,11 +41,6 @@ export const addItemToCart = (product) => async dispatch => {
         return updatedCart;
     }
 }
-
-const initialState = {
-  cart: [],
-};
-
 export const deleteItemFromCart = (item_id) => async dispatch => {
     const response = await fetch('/api/carts/delete', {
         method: 'DELETE',
@@ -61,6 +56,9 @@ export const deleteItemFromCart = (item_id) => async dispatch => {
     }
 }
 
+const initialState = {
+  cart: [],
+};
 
 
 function cartReducer(state = initialState, action) {

@@ -13,10 +13,6 @@ const TopBarNav = () => {
         dispatch(thunkLogout())
     }
 
-    const check = () => {
-
-    }
-
     return (
         <>
             <div id="top-bar-nav">
