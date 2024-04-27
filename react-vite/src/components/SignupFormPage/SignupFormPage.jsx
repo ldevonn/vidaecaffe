@@ -1,91 +1,104 @@
-import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {Navigate, NavLink, useNavigate} from "react-router-dom";
 import { thunkSignup } from "../../redux/session";
+import {useFormik} from "formik";
+import * as Yup from "yup";
 import './SignupForm.css'
+
+const validationSchema = Yup.object({
+    username: Yup.string()
+        .required("Name must be provided"),
+    email: Yup.string()
+        .email("Invalid email format")
+        .required("Email must be provided"),
+    password: Yup.string()
+        .min(8, "Password must be at least 8 characters long")
+        .required("Password must be provided"),
+    confirmPassword: Yup.string()
+        .oneOf([Yup.ref("password"), null], "Passwords must match")
+        .min(8, "Password must be at least 8 characters long")
+        .required("Password must be provided"),
+})
 
 function SignupFormPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const sessionUser = useSelector((state) => state.session.user);
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [errors, setErrors] = useState({});
-
   if (sessionUser) return <Navigate to="/" replace={true} />;
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const {handleSubmit,
+      handleChange,
+      values,
+      errors
+  } = useFormik({
+      initialValues: {
+          username: "",
+          email: "",
+          password: "",
+          confirmPassword: ""
+      },
+      validationSchema,
+      onSubmit: async (values) => {
 
-    if (password !== confirmPassword) {
-      return setErrors({
-        confirmPassword:
-          "Confirm Password field must be the same as the Password field",
-      });
-    }
-
-    const serverResponse = await dispatch(
-      thunkSignup({
-        username,
-        email,
-        password,
-      })
-    );
-
-    console.log(serverResponse);
-
-    if (serverResponse) {
-      setErrors(serverResponse);
-    } else {
-      navigate("/");
-    }
-  };
+          const serverResponse = await dispatch(
+              thunkSignup({
+                  username: values.username,
+                  email: values.email,
+                  password: values.password,
+              })
+          );
+          if (!serverResponse) {
+              navigate("/")
+          }
+      }
+  });
 
   return (
     <>
       <h1 id='signup-page-title'>Sign Up</h1>
-      {errors.server && <p>{errors.server}</p>}
       <div id='signup-form-container'>
         <form onSubmit={handleSubmit} id="signup-form">
             <input
               type="text"
-              value={username}
+              name='username'
+              value={values.username}
               placeholder='Username'
               id='username-field'
-              onChange={(e) => setUsername(e.target.value)}
+              onChange={handleChange}
               required
             />
-          {errors.username && <p>{errors.username}</p>}
+          <p id='errors'> {errors.username}</p>
             <input
               type="text"
-              value={email}
+              name='email'
+              value={values.email}
               placeholder='Email'
               id='email-field'
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={handleChange}
               required
             />
-          {errors.email && <p>{errors.email}</p>}
+          <p id='errors'>{errors.email}</p>
 
             <input
               type="password"
-              value={password}
+              name='password'
+              value={values.password}
               id='password-field'
               placeholder='Password'
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={handleChange}
               required
             />
-          {errors.password && <p>{errors.password}</p>}
+          <p id='errors'>{errors.password}</p>
             <input
               type="password"
-              value={confirmPassword}
+              name='confirmPassword'
+              value={values.confirmPassword}
               id='password-field'
               placeholder='Confirm Password'
-              onChange={(e) => setConfirmPassword(e.target.value)}
+              onChange={handleChange}
               required
             />
-          {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
+          <p id='errors'>{errors.confirmPassword}</p>
           <button id='signup-form-button' type="submit">Sign Up</button>
           <NavLink id='navlink' to='/login'> {"Already have an account?"} <br /> {"Sign in here!"}
           </NavLink>

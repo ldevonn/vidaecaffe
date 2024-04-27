@@ -21,7 +21,7 @@
     border-radius: 5px;
     border: none;
     background: #3B3B3B;
-    margin-bottom: 5px;
+    /*margin-bottom: 5px;*/
 }
 
 #navlink {
@@ -32,9 +32,8 @@
 #errors {
     color: red;
     height: 1rem;
-    padding: 0.25rem;
     background: transparent;
-    margin-bottom: 15px;
+    margin-bottom: 5px;
 }
 
 #login-form-button {
@@ -54,6 +53,7 @@
     cursor: pointer;
 }
 
-/*input::placeholder {*/
-/*    padding-left: 30px*/
-/*}*/
+input {
+    padding-left: 30px;
+    color: white;
+}

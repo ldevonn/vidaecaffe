@@ -16,11 +16,13 @@ const TopBarNav = () => {
     return (
         <>
             <div id="top-bar-nav">
-                <img id='vida-logo-nav' src={vidaLogo} alt="vidaLogo" onClick={() => navigate("/")}/>
-                <div id="section-1">
-                    <NavLink to='/menu'>Menu</NavLink>
-                    <NavLink to='/'>Merch</NavLink>
-                    <NavLink to='/'>About Us</NavLink>
+                <div id="top-bar-nav-content">
+                    <img id='vida-logo-nav' src={vidaLogo} alt="vidaLogo" onClick={() => navigate("/")}/>
+                    <div id="section-1">
+                        <NavLink to='/menu'>Menu</NavLink>
+                        <NavLink to='/'>Merch</NavLink>
+                        <NavLink to='/'>About Us</NavLink>
+                    </div>
                 </div>
                 <div id="section-2"></div>
                 <div id='section-3'>

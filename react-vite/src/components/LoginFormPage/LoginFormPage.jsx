@@ -38,6 +38,10 @@ function LoginFormPage() {
     }
   })
 
+    const handleDemoAdmin = async () => {
+      await dispatch(thunkLogin({ email: "demo@gmail.com", password: "password" }));
+    }
+
   if (sessionUser) return <Navigate to="/" replace={true} />;
 
   return (
@@ -63,7 +67,8 @@ function LoginFormPage() {
                 onChange={handleChange}
               />
               <p id='errors'> {errors.password}</p>
-          <button id='login-form-button' type="submit">Sign In</button>
+            <button id='login-form-button' type="submit">Sign In</button>
+            <button id='login-form-button' onClick={() => handleDemoAdmin()}>Demo Admin</button>
           <NavLink id='navlink' to='/signup'> {"Don't have an account?"} <br /> {"Sign up and earn points on your next order!"}
           </NavLink>
         </form>

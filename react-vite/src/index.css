@@ -25,3 +25,25 @@ h6 {
 p {
     font-size: 16px;
 }
+
+@media (min-width: 900px) {
+    .all-item-tiles-container {
+      width: 900px;
+    }
+}
+
+@media (min-width: 900px) {
+    .all-item-tiles-container {
+      width: 900px;
+    }
+}
+
+@media (max-width: 950px) {
+    .gvwordmark {
+      display: none;
+    }
+    .gvlettermark {
+        align-self: center;
+        justify-self: center;
+    }
+}
