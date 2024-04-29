@@ -37,10 +37,10 @@ function DrinkDetails() {
     return (
         <>
             <div className="product-details">
-                <h1>{product.name}</h1>
-                <p>${product.price}</p>
-                <img src={product.imageUrl} alt={product.name} />
-                <p>{product.description}</p>
+                <h1>{product && product.name}</h1>
+                <p>${product && product.price}</p>
+                <img src={product && product.imageUrl} alt={product && product.name} />
+                <p>{product && product.description}</p>
             </div>
             {currentUser && currentUser.role === 'admin' ? (
                 <>

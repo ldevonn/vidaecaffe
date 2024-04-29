@@ -70,7 +70,9 @@ const ProductFormPage = () => {
                 product_img
             })
         );
-        navigate(`/drinks/${newProduct.id}`)
+        if (!newProduct.errors){
+            navigate(`/drinks/${newProduct.id}`)
+        }
     }
 
     useEffect(() => {
@@ -92,7 +94,7 @@ const ProductFormPage = () => {
                     <option value='hot-coffee'>Hot Coffee</option>
                 </StyledSelect>
                 <StyledField type='file'></StyledField>
-                <StyledSubmit type='submit'>Test</StyledSubmit>
+                <StyledSubmit type='submit'>Submit</StyledSubmit>
             </StyledForm>
         </>
     )

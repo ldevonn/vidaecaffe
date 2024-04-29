@@ -70,6 +70,14 @@ def edit_product_by_id(product_id):
         return jsonify({'error': 'Product not found'}), 404
     else:
         data = request.get_json()
+
+        if (not data['name'] or
+                not data['description'] or
+                not data['price'] or
+                not data['category'] or
+                not data['product_img']):
+            return {'errors': 'Field cannot be empty'}, 400
+
         product.name = data.get('name', product.name)
         product.description = data.get('description', product.description)
         product.price = data.get('price', product.price)
@@ -102,25 +110,4 @@ def create_product():
         db.session.add(product)
         db.session.commit()
         return product.to_dict()
-    return jsonify(form.errors), 400
-
-
-@product_routes.route('/<int:product_id>', methods=['PUT'])
-def edit_product(product_id):
-    """
-    Edits an existing product
-    """
-
-    product = Product.query.get(product_id)
-
-    if not product:
-        return jsonify({'error': 'Product not found'}), 404
-    else:
-        data = request.get_json()
-        product.name = data.get('name', product.name)
-        product.description = data.get('description', product.description)
-        product.price = data.get('price', product.price)
-        product.category = data.get('category', product.category)
-        product.product_img = data.get('product_img', product.product_img)
-        db.session.commit()
-        return jsonify(product.to_dict())
+    return {'errors': form.errors}, 400

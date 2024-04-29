@@ -1,9 +1,10 @@
 import {useNavigate, useParams} from "react-router-dom";
 import {StyledForm, StyledField, StyledSelect, StyledSubmit} from '../ProductFormPage/ProductFormPage.jsx'
 import {editExistingProduct} from "../../redux/menu.js";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 
 export default function EditDrink() {
+    const products = useSelector(state => state.menu.products);
     const {drinkId} = useParams();
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -27,22 +28,26 @@ export default function EditDrink() {
                 product_img
             })
         );
-        navigate(`/drinks/${newProduct.id}`)
+        if (!newProduct.errors) {
+            navigate(`/drinks/${newProduct.id}`)
+        }
     }
+
+    const product = products &&  products.filter(product => product.id == drinkId)[0];
 
     return (
         <>
             <StyledForm onSubmit={handleSubmit}>
                 <h3 style={{background: 'none', color: "white", marginBottom: '50px'}}>Edit your existing product</h3>
-                <StyledField type='text' name='name' placeholder='Name'></StyledField>
-                <StyledField type='text' name='desc' placeholder='Description'></StyledField>
-                <StyledField type='number' min='0' step='0.01' name='price' placeholder='Price'></StyledField>
+                <StyledField type='text' name='name' placeholder='Name' defaultValue={products && product.name}></StyledField>
+                <StyledField type='text' name='desc' placeholder='Description' defaultValue={products && product.description}></StyledField>
+                <StyledField type='number' min='0' step='0.01' name='price' placeholder='Price' defaultValue={products && product.price}></StyledField>
                 <StyledSelect name='category'>
                     <option value="" disabled>Choose...</option>
                     <option value='hot-coffee'>Hot Coffee</option>
                 </StyledSelect>
                 <StyledField type='file'></StyledField>
-                <StyledSubmit type='submit'>Test</StyledSubmit>
+                <StyledSubmit type='submit'>Submit</StyledSubmit>
             </StyledForm>
         </>
     );

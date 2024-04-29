@@ -56,8 +56,8 @@ export const createNewProduct = (product) => async dispatch => {
         dispatch(createProduct(data));
         return data
     } else if (response.status < 500) {
-        const errors = await response.json();
-        return errors
+        const errorMessages = await response.json();
+        return errorMessages
       }
 }
 
