@@ -1,19 +1,16 @@
 """empty message
 
-Revision ID: fcb5559816a8
+Revision ID: 6272178a852a
 Revises: 
-Create Date: 2024-04-27 10:19:38.020539
+Create Date: 2024-04-29 17:29:20.387354
 
 """
 from alembic import op
 import sqlalchemy as sa
-import os
-environment = os.getenv("FLASK_ENV")
-SCHEMA = os.environ.get("SCHEMA")
 
 
 # revision identifiers, used by Alembic.
-revision = 'fcb5559816a8'
+revision = '6272178a852a'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -42,7 +39,7 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('username', sa.String(length=15), nullable=False),
     sa.Column('email', sa.String(length=20), nullable=False),
-    sa.Column('role', sa.String(length=20), nullable=False),
+    sa.Column('role', sa.String(length=20), nullable=True),
     sa.Column('hashed_password', sa.String(length=255), nullable=False),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('email'),
@@ -92,23 +89,6 @@ def upgrade():
     sa.ForeignKeyConstraint(['product_id'], ['products.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
-
-    if environment == "production":
-        op.execute(f"ALTER TABLE order_products SET SCHEMA {SCHEMA};")
-    if environment == "production":
-        op.execute(f"ALTER TABLE cart_items SET SCHEMA {SCHEMA};")
-    if environment == "production":
-        op.execute(f"ALTER TABLE product_ingredients SET SCHEMA {SCHEMA};")
-    if environment == "production":
-        op.execute(f"ALTER TABLE orders SET SCHEMA {SCHEMA};")
-    if environment == "production":
-        op.execute(f"ALTER TABLE carts SET SCHEMA {SCHEMA};")
-    if environment == "production":
-        op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
-    if environment == "production":
-        op.execute(f"ALTER TABLE products SET SCHEMA {SCHEMA};")
-    if environment == "production":
-        op.execute(f"ALTER TABLE ingredients SET SCHEMA {SCHEMA};")
     # ### end Alembic commands ###
 
 

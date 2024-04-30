@@ -87,7 +87,7 @@ def edit_product_by_id(product_id):
         return jsonify(product.to_dict())
 
 
-@product_routes.route('/new', methods=['GET', 'POST'])
+@product_routes.route('/new', methods=['POST'])
 def create_product():
     """
     Creates a new product

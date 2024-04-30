@@ -3,6 +3,20 @@ import {createNewProduct} from "../../redux/menu.js";
 import {useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
+import * as Yup from 'yup'
+import {useFormik} from "formik";
+
+const validationSchema = Yup.object({
+    name: Yup.string()
+        .required("Product name must be provided"),
+    desc: Yup.string()
+        .required("Product description must be provided"),
+    price: Yup.number()
+        .required("Price must be provided")
+        .min(1, 'Number must be a positive integer'),
+    category: Yup.string()
+        .required("Product category must be provided"),
+})
 
 export const StyledForm = styled.form`
     display: flex;
@@ -20,7 +34,7 @@ export const StyledField = styled.input`
     border-radius: 5px;
     border: none;
     background: #3B3B3B;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     color: white;
     padding-left: 30px;
 `
@@ -52,28 +66,35 @@ const ProductFormPage = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const currentUser = useSelector(state => state.session.user)
-    
-    const handleSubmit = async (event) => {
-        event.preventDefault();
-        const name = event.target.name.value;
-        const description = event.target.desc.value;
-        const price = parseInt(event.target.price.value);
-        const category = event.target.category.value;
-        const product_img = 'none'
 
-        const newProduct = await dispatch(
-            createNewProduct({
-                name,
-                description,
-                price,
-                category,
-                product_img
-            })
-        );
-        if (!newProduct.errors){
-            navigate(`/drinks/${newProduct.id}`)
+    const {handleSubmit,
+        handleChange,
+        values,
+        errors
+    } = useFormik({
+        initialValues: {
+            name: "",
+            desc: "",
+            price: "",
+            category: "",
+        },
+        validationSchema,
+        onSubmit: async (values) => {
+            const serverResponse = await dispatch(
+                createNewProduct({
+                    name: values.name,
+                    description: values.desc,
+                    price: values.price,
+                    category: values.category,
+                    product_img: 'none'
+                })
+            );
+            if (serverResponse && !serverResponse.errors) {
+                navigate(`/drinks/${serverResponse.id}`);
+            }
+
         }
-    }
+    })
 
     useEffect(() => {
         if (!currentUser || currentUser.role !== 'admin') {
@@ -86,14 +107,51 @@ const ProductFormPage = () => {
         <>
             <StyledForm onSubmit={handleSubmit}>
                 <h3 style={{background: 'none', color: "white", marginBottom: '50px'}}>Create a new product</h3>
-                <StyledField type='text' name='name' placeholder='Name'></StyledField>
-                <StyledField type='text' name='desc' placeholder='Description'></StyledField>
-                <StyledField type='number' min='0' step='0.01' name='price' placeholder='Price'></StyledField>
-                <StyledSelect name='category'>
+                <StyledField
+                    type='text'
+                    name='name'
+                    value={values.name}
+                    placeholder='Name'
+                    onChange={handleChange}
+                    required
+                />
+                <p id='errors'>{errors.name}</p>
+                <StyledField
+                    type='text'
+                    name='desc'
+                    value={values.desc}
+                    placeholder='Description'
+                    onChange={handleChange}
+                    required
+                />
+                <p id='errors'>{errors.desc}</p>
+                <StyledField
+                    type='number'
+                    value={values.price}
+                    min='0'
+                    step='0.01'
+                    name='price'
+                    placeholder='Price'
+                    onChange={handleChange}
+                    required
+                />
+                <p id='errors'>{errors.price}</p>
+                <StyledSelect
+                    name='category'
+                    value={values.category}
+                    onChange={handleChange}
+                    required
+                >
                     <option value="" disabled>Choose...</option>
                     <option value='hot-coffee'>Hot Coffee</option>
                 </StyledSelect>
-                <StyledField type='file'></StyledField>
+                <StyledField
+                    name='product_img'
+                    value={values.product_img}
+                    type='file'
+                    disabled
+                    onChange={handleChange}
+                />
                 <StyledSubmit type='submit'>Submit</StyledSubmit>
             </StyledForm>
         </>
