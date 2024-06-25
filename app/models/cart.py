@@ -8,7 +8,7 @@ class Cart(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey(f'{SCHEMA}.users.id'), nullable=False)
 
     user = relationship("User", back_populates="cart")
     items = relationship("CartItem", back_populates="cart")
@@ -27,8 +27,8 @@ class CartItem(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    cart_id = db.Column(db.Integer, db.ForeignKey('carts.id'), nullable=False)
-    product_id = db.Column(db.Integer, db.ForeignKey('products.id'), nullable=False)
+    cart_id = db.Column(db.Integer, db.ForeignKey(f'{SCHEMA}.carts.id'), nullable=False)
+    product_id = db.Column(db.Integer, db.ForeignKey(f'{SCHEMA}.products.id'), nullable=False)
     quantity = db.Column(db.Integer, nullable=False)
 
     cart = relationship("Cart", back_populates="items")
