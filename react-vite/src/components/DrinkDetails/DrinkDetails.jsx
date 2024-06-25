@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import {deleteProductById, getAllProducts} from '../../redux/menu.js';
 import Loader from '../Loader';
 import {addItemToCart} from "../../redux/cart.js";
+import vidaImage from '../../assets/vidaLogo.png'
 
 import './DrinkDetails.css'
 
@@ -38,14 +39,16 @@ function DrinkDetails() {
         <>
             <div className="product-details">
                 <h1>{product && product.name}</h1>
-                <p>${product && product.price}</p>
-                <img src={product && product.imageUrl} alt={product && product.name} />
                 <p>{product && product.description}</p>
+                <img src={product && vidaImage} alt={product && product.name} className='menu-detailed-img'/>
+                <p>${product && product.price}</p>
             </div>
             {currentUser && currentUser.role === 'admin' ? (
-                <>
-                    <button className='cart-edit-button' onClick={() => navigate(`/drinks/${product.id}/edit`)}>Edit Item</button>
-                    <button className='cart-delete-button' onClick={() => handleDelete()}>Delete Item</button>
+                    <>
+                        <button className='cart-edit-button' onClick={() => navigate(`/drinks/${product.id}/edit`)}>Edit
+                            Item
+                        </button>
+                        <button className='cart-delete-button' onClick={() => handleDelete()}>Delete Item</button>
                 </>
 
             ) :
