@@ -1,5 +1,4 @@
-from .db import db, environment, SCHEMA, add_prefix_for_prod
-from sqlalchemy.orm import relationship
+from .db import db, environment, SCHEMA
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 
@@ -9,8 +8,6 @@ class User(db.Model, UserMixin):
 
     if environment == 'production':
         __table_args__ = {'schema': SCHEMA}
-
-    cart = relationship('Cart', back_populates='user', uselist=False)
 
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(15), nullable=False, unique=True)
