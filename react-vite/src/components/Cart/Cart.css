@@ -6,6 +6,7 @@
     margin: 0 auto;
     gap: 20px;
     width: 70%;
+    color: lightcoral;
     align-self: center;
 }
 
@@ -29,6 +30,7 @@
     border-radius: 15px;
     padding: 10px;
     gap: 10px;
+    color: black;
 }
 
 .cart-item p {

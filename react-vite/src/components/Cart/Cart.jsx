@@ -1,7 +1,7 @@
 import {addItemToCart, getUserCart, deleteItemFromCart} from "../../redux/cart.js";
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect, useState} from "react";
-import {NavLink, useNavigate} from "react-router-dom";
+import {NavLink, redirect, useNavigate} from "react-router-dom";
 
 import './Cart.css'
 
@@ -68,11 +68,12 @@ function Cart() {
         setTotals(handleCalculation(cart))
     }
 
-    const handleCheckout = () => {
-        cart.forEach(item => {
-            dispatch(deleteItemFromCart(item.id))
-        })
-        window.alert('Your order has been placed')
+    const handleCheckout = async () => {
+        await Promise.all(cart.map(item =>
+            dispatch(deleteItemFromCart(item.id)))
+        )
+        dispatch(getUserCart(currentUser.id));
+        window.alert('Your order has been placed.')
     }
 
 
