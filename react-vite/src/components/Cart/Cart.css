@@ -9,14 +9,15 @@
     align-self: center;
 }
 
-/*#cart-none {*/
-/*    display: flex;*/
-/*    justify-content: center;*/
-/*    align-items: center;*/
-/*    flex-direction: column;*/
-/*    margin: 0 auto;*/
-/*    margin-top: 20vmin;*/
-/*}*/
+#cart-none {
+    display: flex;
+    color: lightcoral;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 0 auto;
+    margin-top: 20vmin;
+}
 
 .cart-item{
     display: grid;
