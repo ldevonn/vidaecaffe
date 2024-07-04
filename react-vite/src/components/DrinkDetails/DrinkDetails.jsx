@@ -21,7 +21,7 @@ function DrinkDetails() {
 
     const handleDelete = () => {
 
-        const shouldDelete = window.confirm("Are you sure you want to update this item?")
+        const shouldDelete = window.confirm("Are you sure you want to delete this item? This action cannot be undone.")
 
         if (shouldDelete) {
             dispatch(deleteProductById(drinkId));

@@ -39,8 +39,8 @@
 }
 
 .cart-delete-button {
-    background-color: darkred;
-    color: white;
+    background-color: green;
+    color: black;
     border: none;
     width: 20%;
     height: 5%;
