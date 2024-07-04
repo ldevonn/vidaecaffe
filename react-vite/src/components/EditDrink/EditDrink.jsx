@@ -40,18 +40,23 @@ export default function EditDrink() {
         },
         validationSchema,
         onSubmit: async (values) => {
-            const serverResponse = await dispatch(
-                editExistingProduct({
-                    id: product.id,
-                    name: values.name,
-                    description: values.desc,
-                    price: values.price,
-                    category: values.category,
-                    product_img: 'none'
-                })
-            );
-            if (serverResponse && !serverResponse.errors) {
-                navigate(`/drinks/${serverResponse.id}`);
+
+            const shouldUpdate = window.confirm("Are you sure you want to update this item?")
+
+            if (shouldUpdate) {
+                const serverResponse = await dispatch(
+                    editExistingProduct({
+                        id: product.id,
+                        name: values.name,
+                        description: values.desc,
+                        price: values.price,
+                        category: values.category,
+                        product_img: 'none'
+                    })
+                );
+                if (serverResponse && !serverResponse.errors) {
+                    navigate(`/drinks/${serverResponse.id}`);
+                }
             }
         }
     })

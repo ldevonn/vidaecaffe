@@ -20,8 +20,13 @@ function DrinkDetails() {
     }, [dispatch]);
 
     const handleDelete = () => {
-        dispatch(deleteProductById(drinkId));
-        navigate('/menu')
+
+        const shouldDelete = window.confirm("Are you sure you want to update this item?")
+
+        if (shouldDelete) {
+            dispatch(deleteProductById(drinkId));
+            navigate('/menu')
+        }
     }
     if (!products) {
         return <Loader/>

@@ -37,3 +37,11 @@
 .menu-detailed-img {
     width: 100px;
 }
+
+.cart-delete-button {
+    background-color: darkred;
+    color: white;
+    border: none;
+    width: 20%;
+    height: 5%;
+}
