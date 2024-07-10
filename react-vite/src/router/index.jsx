@@ -31,23 +31,11 @@ export const router = createBrowserRouter([
         element: <MenuPage />,
       },
       {
-        path: "/drinks/hot-coffee",
+        path: "/drinks/:category",
         element: <HotCoffee />,
       },
       {
-        path: "/drinks/cold-coffee",
-        element: <ColdCoffee />,
-      },
-      {
-        path: "/drinks/cold-tea",
-        element: <ColdTea />,
-      },
-      {
-        path: "/drinks/hot-tea",
-        element: <HotTea />,
-      },
-      {
-        path: `/drinks/:drinkId`,
+        path: `/drinks/:category/:drinkId`,
         element: <DrinkDetails/>
       },
       {

@@ -38,10 +38,45 @@
     width: 100px;
 }
 
-.cart-delete-button {
-    background-color: green;
-    color: black;
+.admin-buttons {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 10%;
+
+    .cart-delete-button {
+        border-radius: 15px;
+    }
+    .cart-edit-button {
+        border-radius: 15px;
+    }
+}
+
+.cart-edit-button {
+    background-color: teal;
     border: none;
+    color: #f3f363;
+    font-size: 18px;
+    font-weight: bold;
+
     width: 20%;
-    height: 5%;
+    height: 40px;
+
+    &:hover {
+        cursor: pointer;
+    }
+
+}
+
+.cart-delete-button {
+    background-color: darkred;
+    color: #ffffff;
+    border: none;
+    font-size: 18px;
+    font-weight: bold;
+    width: 20%;
+    height: 40px;
+
+    &:hover {
+        cursor: pointer;
+    }
 }

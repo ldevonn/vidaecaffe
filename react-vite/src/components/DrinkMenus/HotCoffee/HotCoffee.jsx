@@ -3,11 +3,12 @@ import {getAllProducts} from "../../../redux/menu.js";
 import {useDispatch, useSelector} from "react-redux";
 import './HotCoffee.css'
 import vidaLogo from '../../../assets/vidaLogo.png'
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 
 function HotCoffee() {
     const dispatch = useDispatch();
     const products = useSelector(state => state.menu.products);
+    const {category} = useParams()
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -17,17 +18,17 @@ function HotCoffee() {
     fetchData()
   }, [dispatch]);
 
-    const hotCoffees = products ? products.filter(product => product.category === 'hot-coffee') : [];
+    const displayProducts = products ? products.filter(product => product.category === category) : [];
 
     const handleClick = (id) => {
-        navigate(`/drinks/${id}`);
+        navigate(`/drinks/${category}/${id}`);
     }
 
     return (
         <>
             <div id='display-grid'>
                 {
-                    hotCoffees.map(product => (
+                    displayProducts.map(product => (
                       <div key={product.id} onClick={() => handleClick(product.id)}>
                         <img id='product-img' src={vidaLogo} />
                           <div id='display-card'>

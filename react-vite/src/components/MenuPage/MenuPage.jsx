@@ -83,9 +83,9 @@ function MenuPage() {
         <MenuLeftNavCSS>
           <h3>Drinks</h3>
           <NavLink id='menu-leftNav-NavLink' to='/drinks/hot-coffee'>Hot Coffees</NavLink>
-          {/*<NavLink id='menu-leftNav-NavLink' to='/drinks/cold-coffee'>Cold Coffees</NavLink>*/}
-          {/*<NavLink id='menu-leftNav-NavLink' to='/drinks/hot-tea'>Hot Teas</NavLink>*/}
-          {/*<NavLink id='menu-leftNav-NavLink' to='/drinks/cold-tea'>Cold Teas</NavLink>*/}
+          <NavLink id='menu-leftNav-NavLink' to='/drinks/iced-coffee'>Cold Coffees</NavLink>
+          <NavLink id='menu-leftNav-NavLink' to='/drinks/hot-tea'>Hot Teas</NavLink>
+          <NavLink id='menu-leftNav-NavLink' to='/drinks/iced-tea'>Cold Teas</NavLink>
         </MenuLeftNavCSS>
 
         <StyledMenuCenter>
@@ -98,18 +98,18 @@ function MenuPage() {
             <img src={vidaImg} id={"vida-menu-testing"}/>
             <h6>Hot Coffees</h6>
           </StyledMenuCard>
-          {/*<StyledMenuCard onClick={() => handleNav('/drinks/cold-coffee')}>*/}
-          {/*  <img src={vidaImg} id={"vida-menu-testing"}/>*/}
-          {/*  <h6>Iced Coffees</h6>*/}
-          {/*</StyledMenuCard>*/}
-          {/*<StyledMenuCard onClick={() => handleNav('/drinks/hot-tea')}>*/}
-          {/*  <img src={vidaImg} id={"vida-menu-testing"}/>*/}
-          {/*  <h6>Hot Teas</h6>*/}
-          {/*</StyledMenuCard>*/}
-          {/*<StyledMenuCard onClick={() => handleNav('/drinks/cold-tea')}>*/}
-          {/*  <img src={vidaImg} id={"vida-menu-testing"}/>*/}
-          {/*  <h6>Iced Teas</h6>*/}
-          {/*</StyledMenuCard>*/}
+          <StyledMenuCard onClick={() => handleNav('/drinks/iced-coffee')}>
+            <img src={vidaImg} id={"vida-menu-testing"}/>
+            <h6>Iced Coffees</h6>
+          </StyledMenuCard>
+          <StyledMenuCard onClick={() => handleNav('/drinks/hot-tea')}>
+            <img src={vidaImg} id={"vida-menu-testing"}/>
+            <h6>Hot Teas</h6>
+          </StyledMenuCard>
+          <StyledMenuCard onClick={() => handleNav('/drinks/iced-tea')}>
+            <img src={vidaImg} id={"vida-menu-testing"}/>
+            <h6>Iced Teas</h6>
+          </StyledMenuCard>
 
         </StyledMenuCenter>
       </>
