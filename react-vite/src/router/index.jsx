@@ -9,6 +9,7 @@ import DrinkDetails from "../components/DrinkDetails/index.js";
 import ProductFormPage from "../components/ProductFormPage/ProductFormPage.jsx";
 import EditDrink from "../components/EditDrink/EditDrink.jsx";
 import Cart from "../components/Cart/Cart.jsx";
+import About from '../components/About/About.jsx'
 
 export const router = createBrowserRouter([
   {
@@ -17,6 +18,10 @@ export const router = createBrowserRouter([
       {
         path: "/",
         element: <LandingPage/>,
+      },
+      {
+        path: "/about",
+        element: <About/>
       },
       {
         path: "login",

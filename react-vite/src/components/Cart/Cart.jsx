@@ -1,4 +1,4 @@
-import {addItemToCart, getUserCart, deleteItemFromCart} from "../../redux/cart.js";
+import {addItemToCart, getUserCart, deleteItemFromCart, updateQuantity} from "../../redux/cart.js";
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect, useState} from "react";
 import {NavLink, redirect, useNavigate} from "react-router-dom";
@@ -10,6 +10,7 @@ function Cart() {
     const currentUser = useSelector((state) => state.session.user);
     const dispatch = useDispatch();
     const cart = useSelector((state) => state.cart.cart);
+    let itemQuantity = 1
 
     const [totals, setTotals] = useState({
         subtotal: 0,
@@ -25,14 +26,16 @@ function Cart() {
     }
 
     useEffect(() => {
-        cart && setTotals(handleCalculation(cart))
-
         if (currentUser){
             dispatch(getUserCart(currentUser.id));
         } else {
             navigate('/')
         }
-        }, [dispatch, currentUser, cart, navigate]);
+        }, [dispatch, currentUser, navigate]);
+
+    useEffect(() => {
+        cart && setTotals(handleCalculation(cart))
+    }, [cart]);
 
     if (cart.length === 0) {
         return <>
@@ -44,28 +47,30 @@ function Cart() {
     }
 
     const handleDelete = (item) => {
-        if (item.quantity > 1) {
-            //   if item quantity more than 1, decrease the quantity
-            const reqData = {
-                product_id: item.product_id,
-                quantity: 1
-            }
-            // Assuming the deleteItemFromCart function will decrease the quantity of item
-            dispatch(deleteItemFromCart(reqData));
+        let productId = item.product_id
+        let quantity = item.quantity - 1
+
+        if (quantity > 0) {
+            dispatch(updateQuantity(productId, quantity))
         } else {
-            // if quantity is one, delete the item completely
             dispatch(deleteItemFromCart(item.id));
         }
         setTotals(handleCalculation(cart))
+
+        setTimeout(() => {
+            dispatch(getUserCart(currentUser.id))
+        }, 100)
     }
 
     const handleAdd = (item) => {
-        const reqData = {
-            product_id: item.product_id,
-            quantity: 1
-        }
-        dispatch(addItemToCart(reqData));
+        let productId = item.product_id
+        let quantity = item.quantity + 1
+        dispatch(updateQuantity(productId, quantity));
         setTotals(handleCalculation(cart))
+
+        setTimeout(() => {
+            dispatch(getUserCart(currentUser.id))
+        }, 100)
     }
 
     const handleCheckout = async () => {

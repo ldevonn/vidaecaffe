@@ -3,6 +3,7 @@ from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
 from app import db
 from app.models import Cart, CartItem
+import json
 
 cart_routes = Blueprint('carts', __name__)
 
@@ -41,6 +42,25 @@ def add_to_cart():
     db.session.commit()
 
     return jsonify(success=True, item=item.to_dict()), 201
+
+
+@cart_routes.route('/update', methods=['PUT'])
+@login_required
+def update_cart():
+    data = json.loads(request.data)
+    productId = data.get('productId')
+    quantity = data.get('quantity')
+
+    cart = Cart.query.filter_by(user_id=current_user.id).first()
+    item = CartItem.query.filter_by(product_id=productId, cart_id=cart.id).first()
+    if item is None:
+        return jsonify({'message': 'Item not found in cart'}), 404
+    if quantity is None:
+        return jsonify({'message': 'Quantity missing'}), 400
+
+    item.quantity = quantity
+    db.session.commit()
+    return jsonify(success=True, item=item.to_dict()), 200
 
 @cart_routes.route('/delete', methods=['DELETE'])
 @login_required

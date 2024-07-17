@@ -20,8 +20,7 @@ const TopBarNav = () => {
                     <img id='vida-logo-nav' src={vidaLogo} alt="vidaLogo" onClick={() => navigate("/")}/>
                     <div id="section-1">
                         <NavLink to='/menu'>Menu</NavLink>
-                        <NavLink to='/'>Merch</NavLink>
-                        <NavLink to='/'>About Us</NavLink>
+                        <NavLink to='/about'>About Us</NavLink>
                     </div>
                 </div>
                 <div id="section-2"></div>

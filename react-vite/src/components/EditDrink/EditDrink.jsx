@@ -108,14 +108,10 @@ export default function EditDrink() {
                 >
                     <option value="" disabled>Choose...</option>
                     <option value='hot-coffee'>Hot Coffee</option>
+                    <option value='hot-tea'>Hot Tea</option>
+                    <option value='iced-coffee'>Iced Coffee</option>
+                    <option value='iced-tea'>Iced Tea</option>
                 </StyledSelect>
-                <StyledField
-                    name='product_img'
-                    value={values.product_img}
-                    type='file'
-                    disabled
-                    onChange={handleChange}
-                />
                 <StyledSubmit type='submit'>Submit</StyledSubmit>
             </StyledForm>
         </>

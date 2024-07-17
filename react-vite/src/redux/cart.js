@@ -1,6 +1,7 @@
 const GET_CART = 'GET_CART';
 const ADD_TO_CART = 'ADD_TO_CART';
 const DELETE_ITEM = 'DELETE_ITEM';
+const UPDATE_ITEM_QUANTITY = 'UPDATE_ITEM_QUANTITY'
 
 const getCart = (cart) => ({
   type: GET_CART,
@@ -16,6 +17,11 @@ const deleteItem = (product) => ({
     payload: product
 })
 
+const updateItemQuantity = (product) => ({
+    type: UPDATE_ITEM_QUANTITY,
+    payload: product
+})
+
 export const getUserCart = (userId) => async dispatch => {
     const response = await fetch(`/api/carts/${userId}`)
 
@@ -23,6 +29,22 @@ export const getUserCart = (userId) => async dispatch => {
         const cart = await response.json();
         dispatch(getCart(cart));
         return cart
+    }
+}
+
+export const updateQuantity = (productId, quantity) => async(dispatch) => {
+    const response = await fetch(`/api/carts/update`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ productId, quantity })
+    });
+
+    if (response.ok) {
+        const updatedCart = await response.json();
+        dispatch(updateItemQuantity(updatedCart.item));
+        return updatedCart;
     }
 }
 
@@ -34,7 +56,6 @@ export const addItemToCart = (product) => async dispatch => {
         },
         body: JSON.stringify(product)
     });
-
     if (response.ok) {
         const updatedCart = await response.json();
         dispatch(addToCart(updatedCart.item));
@@ -78,6 +99,15 @@ function cartReducer(state = initialState, action) {
               ...state,
               cart: state.cart.filter(item => item.id !== action.payload)
           }
+    case UPDATE_ITEM_QUANTITY:
+        return {
+            ...state,
+            cart: state.cart.map(item =>
+                item.product_id === action.payload.productId
+                    ? {...item, quantity: action.payload.quantity}
+                    : item
+           )
+     };
     default:
       return state;
   }
