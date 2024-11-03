@@ -3,7 +3,7 @@
 ## User Authentication/Authorization
 
 ### All endpoints that require authentication
-a
+b
 All endpoints that require a current user to be logged in.
 
 - Request: endpoints that require authentication
